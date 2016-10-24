@@ -17,6 +17,8 @@ UINavigationControllerDelegate{
 
     @IBOutlet weak var bottomText: UITextField!
     
+    let DidTouchParticleView = NSNotification.Name("didTouchParticleView")
+    
     let picker = UIImagePickerController()
     
     let memeTextAttributes = [
@@ -45,13 +47,15 @@ UINavigationControllerDelegate{
         topText.delegate = self
         bottomText.delegate = self
         
-        //topText.becomeFirstResponder()
+        topText.becomeFirstResponder()
+        bottomText.becomeFirstResponder()
+
     }
 
     @IBAction func pickAnImage(_ sender: AnyObject) {
         print("Hello Pick an image.");
     
-         
+        
         picker.delegate = self // delegate added
         // Only allow photos to be picked, not taken
         picker.allowsEditing = false
@@ -92,59 +96,67 @@ UINavigationControllerDelegate{
      // Subscribe
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        subscribeToKeyboardNotifications()
-    }
-
-    // Unsubscribe
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
         self.subscribeToKeyboardNotifications()
     }
-    
-    func subscribeToKeyboardNotifications() {
-        _ = NotificationCenter.default
-            
+
+     //Unsubscribe
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.unsubscribeFromKeyboardNotifications()
     }
 //
-//    func keyboardWillShow(notification: NSNotification) {
-//        self.view.frame.origin.y -= getKeyboardHeight(notification: notification)
-//    }
-//    
-//    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
-//        let userInfo = notification.userInfo!
-//        let keyboardSize = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
-//        return keyboardSize.cgRectValue.height
-//    }
+    func subscribeToKeyboardNotifications() {
+        
+        print("subscribeToKeyboardNotifications")
+        // Register to receive notification
+    NotificationCenter.default.addObserver(self, selector: "keyboardWillShow:"    , name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    }
+
+    func unsubscribeFromKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self, name:
+            NSNotification.Name.UIKeyboardWillShow, object: nil)
+    }
+
+    func keyboardWillShow(notification: NSNotification) {
+        self.view.frame.origin.y -= getKeyboardHeight(notification: notification)
+    }
+
+    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
+        let userInfo = notification.userInfo!
+        let keyboardSize = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
+        return keyboardSize.cgRectValue.height
+    }
     
     /// This is for editing text
-//    func textFieldDidBeginEditing(textField: UITextField) {
-//        print("TextField did begin editing method called")
-//    }
-//    func textFieldDidEndEditing(textField: UITextField) {
-//        print("TextField did end editing method called")
-//    }
-//    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-//        print("TextField should begin editing method called")
-//        return true;
-//    }
-//    func textFieldShouldClear(textField: UITextField) -> Bool {
-//        print("TextField should clear method called")
-//        return true;
-//    }
-//    func textFieldShouldEndEditing(textField: UITextField) -> Bool {
-//        print("TextField should snd editing method called")
-//        return true;
-//    }
-//    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-//        print("While entering the characters this method gets called")
-//        return true;
-//    }
-//    func textFieldShouldReturn(textField: UITextField) -> Bool {
-//        print("TextField should return method called")
-//       // topText.resignFirstResponder();
-//        return true;
-//    }
-//    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("TextField did begin editing method called!!!! Show key board!")
+        //self.subscribeToKeyboardNotifications()
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("TextField did end editing method called")
+    }
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        print("TextField should begin editing method called")
+        return true;
+    }
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        print("TextField should clear method called")
+        return true;
+    }
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        print("TextField should snd editing method called")
+        return true;
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        print("While entering the characters this method gets called")
+        return true;
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("TextField should return method called")
+       // topText.resignFirstResponder();
+        return true;
+    }
+    
     
 
 }
