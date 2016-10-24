@@ -51,8 +51,7 @@ UINavigationControllerDelegate{
     @IBAction func pickAnImage(_ sender: AnyObject) {
         print("Hello Pick an image.");
     
-       
-        
+         
         picker.delegate = self // delegate added
         // Only allow photos to be picked, not taken
         picker.allowsEditing = false
@@ -95,7 +94,7 @@ UINavigationControllerDelegate{
         super.viewWillAppear(animated)
         subscribeToKeyboardNotifications()
     }
-    
+
     // Unsubscribe
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -103,19 +102,19 @@ UINavigationControllerDelegate{
     }
     
     func subscribeToKeyboardNotifications() {
-        let center = NotificationCenter.default
+        _ = NotificationCenter.default
             
     }
-    
-    func keyboardWillShow(notification: NSNotification) {
-        self.view.frame.origin.y -= getKeyboardHeight(notification: notification)
-    }
-    
-    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
-        let userInfo = notification.userInfo!
-        let keyboardSize = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
-        return keyboardSize.cgRectValue.height
-    }
+//
+//    func keyboardWillShow(notification: NSNotification) {
+//        self.view.frame.origin.y -= getKeyboardHeight(notification: notification)
+//    }
+//    
+//    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
+//        let userInfo = notification.userInfo!
+//        let keyboardSize = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
+//        return keyboardSize.cgRectValue.height
+//    }
     
     /// This is for editing text
 //    func textFieldDidBeginEditing(textField: UITextField) {
