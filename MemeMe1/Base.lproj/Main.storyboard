@@ -19,8 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w3f-uZ-isV">
-                                <frame key="frameInset" minY="615" width="375" height="44"/>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w3f-uZ-isV">
                                 <items>
                                     <barButtonItem title="Pick An Image" id="Ile-wI-YTl">
                                         <connections>
@@ -29,17 +28,15 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" restorationIdentifier="imagePicker" translatesAutoresizingMaskIntoConstraints="NO" id="zfu-9X-Bsc">
-                                <frame key="frameInset" minX="16" minY="40" width="343" height="553"/>
-                            </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" restorationIdentifier="bottomText" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aTT-g5-Fry">
-                                <frame key="frameInset" minX="31" minY="536" width="303" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="imagePicker" translatesAutoresizingMaskIntoConstraints="NO" id="zfu-9X-Bsc"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aAK-no-bvy">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" restorationIdentifier="topText" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vNN-M9-e6U">
-                                <frame key="frameInset" minX="31" minY="77" width="303" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="bottomText" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ymV-GW-ApZ">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -49,35 +46,32 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="w3f-uZ-isV" secondAttribute="trailing" id="4U7-pZ-6gP"/>
                             <constraint firstItem="zfu-9X-Bsc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="9rF-ml-J6R"/>
-                            <constraint firstItem="w3f-uZ-isV" firstAttribute="top" secondItem="aTT-g5-Fry" secondAttribute="bottom" constant="49" id="E1X-Dd-cZv"/>
+                            <constraint firstItem="aAK-no-bvy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="48" id="BWU-Sb-MWx"/>
+                            <constraint firstItem="aAK-no-bvy" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="42" id="E2J-M7-rnl"/>
+                            <constraint firstItem="w3f-uZ-isV" firstAttribute="top" secondItem="ymV-GW-ApZ" secondAttribute="bottom" constant="53" id="GP0-Fx-cbX"/>
                             <constraint firstItem="w3f-uZ-isV" firstAttribute="top" secondItem="zfu-9X-Bsc" secondAttribute="bottom" constant="22" id="Hl3-M2-3Wg"/>
-                            <constraint firstItem="aTT-g5-Fry" firstAttribute="top" secondItem="vNN-M9-e6U" secondAttribute="bottom" constant="429" id="Nga-q3-Ubl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ymV-GW-ApZ" secondAttribute="trailing" constant="34" id="JRP-wZ-muN"/>
                             <constraint firstItem="zfu-9X-Bsc" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Ppu-j5-IgH"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="aTT-g5-Fry" secondAttribute="trailing" constant="25" id="R8l-bB-JPE"/>
                             <constraint firstItem="zfu-9X-Bsc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="UhF-pe-7eG"/>
-                            <constraint firstItem="vNN-M9-e6U" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="15" id="YHP-oV-zw8"/>
+                            <constraint firstItem="ymV-GW-ApZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="48" id="Zbe-Gx-0zi"/>
                             <constraint firstItem="zfu-9X-Bsc" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="aL3-oa-yOJ"/>
                             <constraint firstItem="w3f-uZ-isV" firstAttribute="top" secondItem="zfu-9X-Bsc" secondAttribute="bottom" constant="22" id="bbt-kb-ogb"/>
                             <constraint firstItem="zfu-9X-Bsc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="bjF-4j-0M2"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="vNN-M9-e6U" secondAttribute="trailing" constant="25" id="eoI-eT-pEn"/>
-                            <constraint firstItem="vNN-M9-e6U" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="57" id="eyi-iO-mtW"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="w3f-uZ-isV" secondAttribute="bottom" constant="8" id="fFL-dD-kdY"/>
-                            <constraint firstItem="aTT-g5-Fry" firstAttribute="top" secondItem="vNN-M9-e6U" secondAttribute="bottom" constant="437" id="p7h-4S-8R3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aAK-no-bvy" secondAttribute="trailing" constant="34" id="hf2-hb-FVd"/>
                             <constraint firstItem="zfu-9X-Bsc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="vuR-pW-mzB"/>
                             <constraint firstItem="w3f-uZ-isV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="xIu-In-nUq"/>
-                            <constraint firstItem="aTT-g5-Fry" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="15" id="y6W-Av-Vlh"/>
-                            <constraint firstItem="aTT-g5-Fry" firstAttribute="top" secondItem="vNN-M9-e6U" secondAttribute="bottom" constant="451" id="zWX-VH-VnG"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="bottomText" destination="aTT-g5-Fry" id="u3s-Sn-Zu7"/>
+                        <outlet property="bottomText" destination="ymV-GW-ApZ" id="Jbu-8k-cvL"/>
                         <outlet property="imagePicker" destination="zfu-9X-Bsc" id="bQ6-4u-USc"/>
-                        <outlet property="topText" destination="vNN-M9-e6U" id="9MV-9R-7HS"/>
+                        <outlet property="topText" destination="aAK-no-bvy" id="Lkc-BH-bXW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-636" y="-3"/>
+            <point key="canvasLocation" x="-636" y="-3.1484257871064472"/>
         </scene>
     </scenes>
 </document>

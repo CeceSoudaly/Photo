@@ -17,8 +17,6 @@ UINavigationControllerDelegate{
 
     @IBOutlet weak var bottomText: UITextField!
     
-    let DidTouchParticleView = NSNotification.Name("didTouchParticleView")
-    
     let picker = UIImagePickerController()
     
     let memeTextAttributes = [
@@ -72,7 +70,7 @@ UINavigationControllerDelegate{
     
     //MARK: - Delegates
     func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [String : AnyObject])
+                               didFinishPickingMediaWithInfo info: [String : Any])
     {
         var  chosenImage = UIImage()
         chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
@@ -81,13 +79,13 @@ UINavigationControllerDelegate{
         dismiss(animated:true, completion: nil) //5
     }
     
-    @IBAction func pickAnImageFromAlbum (sender: AnyObject) {
+    @IBAction func pickAnImageFromAlbum (_ sender: AnyObject) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         self.present(imagePicker, animated: true, completion: nil)
     }
     
-    @IBAction func pickAnImageFromCamera (sender: AnyObject) {
+    @IBAction func pickAnImageFromCamera (_ sender: AnyObject) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         self.present(imagePicker, animated: true, completion: nil)
@@ -97,6 +95,9 @@ UINavigationControllerDelegate{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.subscribeToKeyboardNotifications()
+        topText.resignFirstResponder()
+        bottomText.resignFirstResponder()
+
     }
 
      //Unsubscribe
@@ -104,36 +105,37 @@ UINavigationControllerDelegate{
         super.viewWillDisappear(animated)
         self.unsubscribeFromKeyboardNotifications()
     }
-//
+
     func subscribeToKeyboardNotifications() {
-        
         print("subscribeToKeyboardNotifications")
         // Register to receive notification
-    NotificationCenter.default.addObserver(self, selector: "keyboardWillShow:"    , name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-    }
 
-    func unsubscribeFromKeyboardNotifications() {
-        NotificationCenter.default.removeObserver(self, name:
-            NSNotification.Name.UIKeyboardWillShow, object: nil)
-    }
-
-    func keyboardWillShow(notification: NSNotification) {
-        self.view.frame.origin.y -= getKeyboardHeight(notification: notification)
-    }
-
-    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
-        let userInfo = notification.userInfo!
-        let keyboardSize = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
-        return keyboardSize.cgRectValue.height
     }
     
+   
+    func unsubscribeFromKeyboardNotifications() {
+//        
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+        
+    }
+
+    func keyboardWillShow(sender: NSNotification) {
+   
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+   
     /// This is for editing text
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print("TextField did begin editing method called!!!! Show key board!")
-        //self.subscribeToKeyboardNotifications()
+        print("TextField did begin editing method called.......")
+   
+        
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         print("TextField did end editing method called")
+     
     }
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         print("TextField should begin editing method called")
@@ -153,7 +155,8 @@ UINavigationControllerDelegate{
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("TextField should return method called")
-       // topText.resignFirstResponder();
+        topText.resignFirstResponder();
+        bottomText.resignFirstResponder();
         return true;
     }
     

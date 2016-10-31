@@ -193,15 +193,18 @@
 				TargetAttributes = {
 					A9F16B791DB07A500024490A = {
 						CreatedOnToolsVersion = 8.0;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 					A9F16B8D1DB07A500024490A = {
 						CreatedOnToolsVersion = 8.0;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						TestTargetID = A9F16B791DB07A500024490A;
 					};
 					A9F16B981DB07A500024490A = {
 						CreatedOnToolsVersion = 8.0;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						TestTargetID = A9F16B791DB07A500024490A;
 					};
@@ -503,6 +506,7 @@
 				A9F16BA41DB07A500024490A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A9F16BA51DB07A500024490A /* Build configuration list for PBXNativeTarget "MemeMe1Tests" */ = {
 			isa = XCConfigurationList;
@@ -511,6 +515,7 @@
 				A9F16BA71DB07A500024490A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A9F16BA81DB07A500024490A /* Build configuration list for PBXNativeTarget "MemeMe1UITests" */ = {
 			isa = XCConfigurationList;
@@ -519,6 +524,7 @@
 				A9F16BAA1DB07A500024490A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
