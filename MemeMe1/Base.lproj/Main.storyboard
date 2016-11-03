@@ -26,6 +26,13 @@
                                             <action selector="pickAnImage:" destination="BYZ-38-t0r" id="A7L-Wg-Mee"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" id="j19-Az-0DG">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qGZ-3A-gmg">
+                                            <rect key="frame" x="135" y="7" width="100" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Take Picture"/>
+                                        </button>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="imagePicker" translatesAutoresizingMaskIntoConstraints="NO" id="zfu-9X-Bsc"/>
