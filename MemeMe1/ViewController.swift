@@ -130,11 +130,14 @@ UINavigationControllerDelegate{
     /// This is for editing text
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("TextField did begin editing method called.......")
+        moveTextField(textField: textField, moveDistance: -250, moveUp: true)
    
         
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         print("TextField did end editing method called")
+        moveTextField(textField: textField, moveDistance: -250, moveUp: false)
+        
      
     }
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -160,6 +163,17 @@ UINavigationControllerDelegate{
         return true;
     }
     
+    func moveTextField(textField:UITextField, moveDistance: Int,moveUp: Bool)
+    {
+        let moveDuration = 0.3
+        let movement:CGFloat = CGFloat(moveUp ? moveDistance : -moveDistance)
+        UIView.beginAnimations("animateTextField", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(moveDuration)
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        UIView.commitAnimations()
+        
+    }
     
 
 }
