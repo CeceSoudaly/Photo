@@ -94,7 +94,6 @@ UINavigationControllerDelegate{
      // Subscribe
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.subscribeToKeyboardNotifications()
         topText.resignFirstResponder()
         bottomText.resignFirstResponder()
 
@@ -103,25 +102,8 @@ UINavigationControllerDelegate{
      //Unsubscribe
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.unsubscribeFromKeyboardNotifications()
     }
 
-    func subscribeToKeyboardNotifications() {
-        print("subscribeToKeyboardNotifications")
-        // Register to receive notification
-
-    }
-    
-   
-    func unsubscribeFromKeyboardNotifications() {
-//        
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
-        
-    }
-
-    func keyboardWillShow(sender: NSNotification) {
-   
-    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -129,16 +111,22 @@ UINavigationControllerDelegate{
    
     /// This is for editing text
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print("TextField did begin editing method called.......")
-        moveTextField(textField: textField, moveDistance: -250, moveUp: true)
-   
-        
+    
+       if(textField == bottomText)
+        {
+    
+               moveTextField(textField: textField, moveDistance: -250, moveUp: true)
+        }
+      
     }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print("TextField did end editing method called")
+    
+        if(textField == bottomText)
+        {
         moveTextField(textField: textField, moveDistance: -250, moveUp: false)
-        
-     
+        }
+      
     }
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         print("TextField should begin editing method called")
@@ -163,6 +151,7 @@ UINavigationControllerDelegate{
         return true;
     }
     
+ 
     func moveTextField(textField:UITextField, moveDistance: Int,moveUp: Bool)
     {
         let moveDuration = 0.3
