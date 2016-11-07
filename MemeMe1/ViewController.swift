@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController , UITextFieldDelegate, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate{
@@ -49,7 +50,26 @@ UINavigationControllerDelegate{
         bottomText.becomeFirstResponder()
 
     }
+    
+    
+    
+    @IBAction func takePhoto(_ sender: AnyObject) {
+        if
+        
+        UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
+        {
+            let imagepicker = UIImagePickerController()
+            imagepicker.delegate = self
+            imagepicker.sourceType = UIImagePickerControllerSourceType.camera;
+            imagepicker.allowsEditing = false
+            self.present(imagepicker, animated: true, completion: nil)
+            
+        }
+        
+    }
 
+   
+    
     @IBAction func pickAnImage(_ sender: AnyObject) {
         print("Hello Pick an image.");
     
@@ -66,6 +86,12 @@ UINavigationControllerDelegate{
         //Text fields
         topText.isHidden = false
         bottomText.isHidden = false
+    }
+    
+    @IBAction func saveImage(_ sender: AnyObject) {
+        let imageData = UIImageJPEGRepresentation(imagePicker.image!, 0.6)
+        let compressedJPEGImage = UIImage(data: imageData!)
+        UIImageWriteToSavedPhotosAlbum(compressedJPEGImage!,nil, nil, nil)
     }
     
     //MARK: - Delegates
@@ -96,6 +122,30 @@ UINavigationControllerDelegate{
         super.viewWillAppear(animated)
         topText.resignFirstResponder()
         bottomText.resignFirstResponder()
+        
+        var captureSession = AVCaptureSession()
+        var captureSessionOutput = AVCaptureStillImageOutput()
+        
+        //
+//        let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
+//       
+//         for device in devices!
+//        {
+//            if (device as AnyObject).position == AVCaptureDevicePosition.front{
+//                do{
+//                    let input = try AVCaptureDeviceInput(device: device as! AVCaptureDevice)
+//                
+//                    if captureSession.canAddInput(<#T##input: AVCaptureInput!##AVCaptureInput!#>)
+//                    {
+//                        captureSession.addInput(<#T##input: AVCaptureInput!##AVCaptureInput!#>)
+//                    }
+//                }
+//                catch{
+//                    print("Error")
+//                }
+//            
+//            }
+//        }
 
     }
 
@@ -163,7 +213,8 @@ UINavigationControllerDelegate{
         UIView.commitAnimations()
         
     }
-    
 
+
+   
 }
 
