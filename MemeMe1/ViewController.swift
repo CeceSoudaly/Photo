@@ -96,13 +96,11 @@ UINavigationControllerDelegate{
     
     //MARK: - Delegates
     func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [String : Any])
+                               didFinishPickingImage image:UIImage!,editingInfo:[NSObject:AnyObject]!)
     {
-        var  chosenImage = UIImage()
-        chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
-        imagePicker.contentMode = .scaleAspectFit //3
-        imagePicker.image = chosenImage //4
-        dismiss(animated:true, completion: nil) //5
+        imagePicker.image = image
+        self.dismiss(animated: true, completion: nil)
+    
     }
     
     @IBAction func pickAnImageFromAlbum (_ sender: AnyObject) {
