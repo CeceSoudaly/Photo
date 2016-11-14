@@ -71,9 +71,6 @@ UINavigationControllerDelegate{
    
     
     @IBAction func pickAnImage(_ sender: AnyObject) {
-        print("Hello Pick an image.");
-    
-        
         picker.delegate = self // delegate added
         // Only allow photos to be picked, not taken
         picker.allowsEditing = false
@@ -86,13 +83,25 @@ UINavigationControllerDelegate{
         //Text fields
         topText.isHidden = false
         bottomText.isHidden = false
+
+        
     }
     
     @IBAction func saveImage(_ sender: AnyObject) {
-        let imageData = UIImageJPEGRepresentation(imagePicker.image!, 0.6)
+
+    
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        let newImage  = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        let imageData = UIImageJPEGRepresentation(newImage!, 0.6)
         let compressedJPEGImage = UIImage(data: imageData!)
         UIImageWriteToSavedPhotosAlbum(compressedJPEGImage!,nil, nil, nil)
+    
+    
     }
+    
     
     //MARK: - Delegates
     func imagePickerController(_ picker: UIImagePickerController,
@@ -102,49 +111,12 @@ UINavigationControllerDelegate{
         self.dismiss(animated: true, completion: nil)
     
     }
-    
-    @IBAction func pickAnImageFromAlbum (_ sender: AnyObject) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        self.present(imagePicker, animated: true, completion: nil)
-    }
-    
-    @IBAction func pickAnImageFromCamera (_ sender: AnyObject) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        self.present(imagePicker, animated: true, completion: nil)
-    }
-    
-     // Subscribe
+       // Subscribe
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         topText.resignFirstResponder()
         bottomText.resignFirstResponder()
-        
-        var captureSession = AVCaptureSession()
-        var captureSessionOutput = AVCaptureStillImageOutput()
-        
-        //
-//        let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
-//       
-//         for device in devices!
-//        {
-//            if (device as AnyObject).position == AVCaptureDevicePosition.front{
-//                do{
-//                    let input = try AVCaptureDeviceInput(device: device as! AVCaptureDevice)
-//                
-//                    if captureSession.canAddInput(<#T##input: AVCaptureInput!##AVCaptureInput!#>)
-//                    {
-//                        captureSession.addInput(<#T##input: AVCaptureInput!##AVCaptureInput!#>)
-//                    }
-//                }
-//                catch{
-//                    print("Error")
-//                }
-//            
-//            }
-//        }
-
+  
     }
 
      //Unsubscribe
@@ -172,28 +144,29 @@ UINavigationControllerDelegate{
     
         if(textField == bottomText)
         {
-        moveTextField(textField: textField, moveDistance: -250, moveUp: false)
+            moveTextField(textField: textField, moveDistance: -250, moveUp: false)
         }
       
+        
     }
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        print("TextField should begin editing method called")
+        //print("TextField should begin editing method called")
         return true;
     }
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        print("TextField should clear method called")
+        //print("TextField should clear method called")
         return true;
     }
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        print("TextField should snd editing method called")
+       // print("TextField should snd editing method called")
         return true;
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        print("While entering the characters this method gets called")
+       // print("While entering the characters this method gets called")
         return true;
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("TextField should return method called")
+       // print("TextField should return method called")
         topText.resignFirstResponder();
         bottomText.resignFirstResponder();
         return true;
