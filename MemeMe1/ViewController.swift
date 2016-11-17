@@ -52,11 +52,9 @@ UINavigationControllerDelegate{
     }
     
     
-    
     @IBAction func takePhoto(_ sender: AnyObject) {
-        if
         
-        UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
+       if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
         {
             let imagepicker = UIImagePickerController()
             imagepicker.delegate = self
@@ -64,12 +62,17 @@ UINavigationControllerDelegate{
             imagepicker.allowsEditing = false
             self.present(imagepicker, animated: true, completion: nil)
             
+        }else
+       {
+       
+            let alertController = UIAlertController(title: title, message: "camera not available",preferredStyle: .alert)
+            let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(OKAction)
+            self.present(alertController, animated: true, completion: nil)
         }
         
     }
 
-   
-    
     @IBAction func pickAnImage(_ sender: AnyObject) {
         picker.delegate = self // delegate added
         // Only allow photos to be picked, not taken
