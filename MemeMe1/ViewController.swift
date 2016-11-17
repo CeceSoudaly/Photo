@@ -90,7 +90,7 @@ UINavigationControllerDelegate{
     @IBAction func saveImage(_ sender: AnyObject) {
 
     
-        UIGraphicsBeginImageContext(self.view.frame.size)
+        UIGraphicsBeginImageContext(imagePicker.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let newImage  = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -134,8 +134,10 @@ UINavigationControllerDelegate{
     
        if(textField == bottomText)
         {
-    
+            bottomText.text = ""
                moveTextField(textField: textField, moveDistance: -250, moveUp: true)
+       }else{
+            topText.text = ""
         }
       
     }
@@ -151,6 +153,7 @@ UINavigationControllerDelegate{
     }
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         //print("TextField should begin editing method called")
+        
         return true;
     }
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
