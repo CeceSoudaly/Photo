@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="imagePicker" translatesAutoresizingMaskIntoConstraints="NO" id="zfu-9X-Bsc">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="imagePicker" translatesAutoresizingMaskIntoConstraints="NO" id="zfu-9X-Bsc">
                                 <rect key="frame" x="16" y="40" width="343" height="553"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="topText" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aAK-no-bvy">
@@ -48,20 +48,30 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w3f-uZ-isV">
                                 <rect key="frame" x="0.0" y="605" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem title="Pick An Image" id="Ile-wI-YTl" userLabel="pickAnImageButton">
+                                    <barButtonItem title="Pick Image" id="Ile-wI-YTl" userLabel="pickAnImageButton">
                                         <connections>
                                             <action selector="pickAnImage:" destination="BYZ-38-t0r" id="A7L-Wg-Mee"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Take A Picture" id="GOB-IG-C0X">
+                                    <barButtonItem title="Camera" width="72" id="GOB-IG-C0X">
                                         <connections>
                                             <action selector="takePhoto:" destination="BYZ-38-t0r" id="tyJ-BY-0cW"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="SaveImage" id="swT-bP-s7Q">
+                                    <barButtonItem title="Save" width="56" id="swT-bP-s7Q">
                                         <connections>
                                             <action selector="saveImage:" destination="BYZ-38-t0r" id="UD0-b3-UHA"/>
                                         </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" id="Lj2-XF-ov6">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sPD-OW-1Ot">
+                                            <rect key="frame" x="258" y="7" width="94" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Share"/>
+                                            <connections>
+                                                <action selector="shareImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WWP-wb-o40"/>
+                                            </connections>
+                                        </button>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
@@ -90,6 +100,7 @@
                     <connections>
                         <outlet property="bottomText" destination="ymV-GW-ApZ" id="Jbu-8k-cvL"/>
                         <outlet property="imagePicker" destination="zfu-9X-Bsc" id="bQ6-4u-USc"/>
+                        <outlet property="takePictue" destination="GOB-IG-C0X" id="gjD-Iy-kwu"/>
                         <outlet property="topText" destination="aAK-no-bvy" id="Lkc-BH-bXW"/>
                     </connections>
                 </viewController>

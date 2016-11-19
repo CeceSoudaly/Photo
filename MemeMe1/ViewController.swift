@@ -18,6 +18,8 @@ UINavigationControllerDelegate{
 
     @IBOutlet weak var bottomText: UITextField!
     
+    @IBOutlet weak var takePictue: UIBarButtonItem!
+    
     let picker = UIImagePickerController()
     
     let memeTextAttributes = [
@@ -48,6 +50,12 @@ UINavigationControllerDelegate{
         
         topText.becomeFirstResponder()
         bottomText.becomeFirstResponder()
+        
+        if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
+        {
+            takePictue.isEnabled = false;
+            
+        }
 
     }
     
@@ -103,6 +111,23 @@ UINavigationControllerDelegate{
         UIImageWriteToSavedPhotosAlbum(compressedJPEGImage!,nil, nil, nil)
     
     
+    }
+    
+    
+    @IBAction func shareImage(_ sender: Any) {
+        // image to share
+        let image = UIImage(named: "Image")
+        
+        // set up activity view controller
+        let imageToShare = [ image! ]
+        let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        
+        // exclude some activity types from the list (optional)
+        activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
+        
+        // present the view controller
+        self.present(activityViewController, animated: true, completion: nil)
     }
     
     
