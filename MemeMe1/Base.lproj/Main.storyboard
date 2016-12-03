@@ -98,6 +98,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="ToolBar" destination="w3f-uZ-isV" id="7H7-1c-Yip"/>
                         <outlet property="bottomText" destination="ymV-GW-ApZ" id="Jbu-8k-cvL"/>
                         <outlet property="imagePicker" destination="zfu-9X-Bsc" id="bQ6-4u-USc"/>
                         <outlet property="takePictue" destination="GOB-IG-C0X" id="gjD-Iy-kwu"/>

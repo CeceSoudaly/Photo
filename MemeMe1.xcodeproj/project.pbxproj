@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A9C642051DE2A477000ABE12 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9C642041DE2A477000ABE12 /* Social.framework */; };
 		A9F16B7E1DB07A500024490A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F16B7D1DB07A500024490A /* AppDelegate.swift */; };
 		A9F16B801DB07A500024490A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F16B7F1DB07A500024490A /* ViewController.swift */; };
 		A9F16B831DB07A500024490A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9F16B811DB07A500024490A /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A9C642041DE2A477000ABE12 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		A9F16B7A1DB07A500024490A /* MemeMe1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMe1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9F16B7D1DB07A500024490A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9F16B7F1DB07A500024490A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9C642051DE2A477000ABE12 /* Social.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +77,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A9C642031DE2A477000ABE12 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A9C642041DE2A477000ABE12 /* Social.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A9F16B711DB07A500024490A = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +92,7 @@
 				A9F16B911DB07A500024490A /* MemeMe1Tests */,
 				A9F16B9C1DB07A500024490A /* MemeMe1UITests */,
 				A9F16B7B1DB07A500024490A /* Products */,
+				A9C642031DE2A477000ABE12 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};

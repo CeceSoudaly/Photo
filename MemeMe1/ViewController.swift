@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import Social
 
 class ViewController: UIViewController , UITextFieldDelegate, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate{
@@ -21,6 +22,9 @@ UINavigationControllerDelegate{
     @IBOutlet weak var takePictue: UIBarButtonItem!
     
     let picker = UIImagePickerController()
+    
+    @IBOutlet weak var ToolBar: UIToolbar!
+//    var meme: meme?
     
     let memeTextAttributes = [
         
@@ -94,41 +98,30 @@ UINavigationControllerDelegate{
         //Text fields
         topText.isHidden = false
         bottomText.isHidden = false
-
-        
+       
     }
     
     @IBAction func saveImage(_ sender: AnyObject) {
 
-    
-        UIGraphicsBeginImageContext(imagePicker.frame.size)
-        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
-        let newImage  = UIGraphicsGetImageFromCurrentImageContext()
+        //hide the tool bar
+        ToolBar.isHidden = true
+        
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        self.view.drawHierarchy(in: self.view.frame,
+                                          afterScreenUpdates: true)
+        let memedImage : UIImage =
+            UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
-        
-        let imageData = UIImageJPEGRepresentation(newImage!, 0.6)
-        let compressedJPEGImage = UIImage(data: imageData!)
-        UIImageWriteToSavedPhotosAlbum(compressedJPEGImage!,nil, nil, nil)
-    
-    
+        UIImageWriteToSavedPhotosAlbum(memedImage,nil, nil, nil)
+        //resumed the tool bar
+        ToolBar.isHidden = false
     }
     
     
-    @IBAction func shareImage(_ sender: Any) {
-        // image to share
-        let image = UIImage(named: "Image")
-        
-        // set up activity view controller
-        let imageToShare = [ image! ]
-        let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-        
-        // exclude some activity types from the list (optional)
-        activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
-        
-        // present the view controller
-        self.present(activityViewController, animated: true, completion: nil)
-    }
+    @IBAction func shareImage(shareImage:UIImage?) {
+        print("sharing....pictue.");
+     }
     
     
     //MARK: - Delegates
