@@ -22,9 +22,12 @@ UINavigationControllerDelegate{
     @IBOutlet weak var takePictue: UIBarButtonItem!
     
     let picker = UIImagePickerController()
+
+    var memedImage: UIImage! = nil
+    var memes: [Meme]!
+    
     
     @IBOutlet weak var ToolBar: UIToolbar!
-//    var meme: meme?
     
     let memeTextAttributes = [
         
@@ -118,10 +121,51 @@ UINavigationControllerDelegate{
         ToolBar.isHidden = false
     }
     
+    struct Meme {
+        
+        var topTextField: String?
+        var bottomTextField: String?
+        var originalImage: UIImage?
+        let memedImage: UIImage!
+    }
     
-    @IBAction func shareImage(shareImage:UIImage?) {
+    @IBAction func shareImage(_ sender: Any) {
         print("sharing....pictue.");
+        // memed image to activity view
+        self.memedImage = generateMemedImage()
+        let activityVC = UIActivityViewController(activityItems: [self.memedImage!],
+                                                  applicationActivities: nil)
+        
+        // Save image to shared
+        activityVC.completionWithItemsHandler = {
+            activity, completed, items, error in
+            if completed {
+                self.saveMeme()
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+        
+        self.present(activityVC, animated: true, completion: nil)
      }
+    
+    func saveMeme() {
+        //hide the tool bar
+        ToolBar.isHidden = true
+         _ = Meme(topTextField: topText.text!, bottomTextField: bottomText.text!, originalImage: imagePicker.image!, memedImage: memedImage)
+        //resumed the tool bar
+        ToolBar.isHidden = false
+    
+    }
+    
+    func generateMemedImage() -> UIImage {
+        
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        self.view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        return memedImage
+    }
     
     
     //MARK: - Delegates
