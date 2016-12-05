@@ -21,6 +21,8 @@ UINavigationControllerDelegate{
     
     @IBOutlet weak var takePictue: UIBarButtonItem!
     
+    var imageSaved = false
+    
     let picker = UIImagePickerController()
 
     var memedImage: UIImage! = nil
@@ -66,7 +68,7 @@ UINavigationControllerDelegate{
 
     }
     
-    
+    //camera option
     @IBAction func takePhoto(_ sender: AnyObject) {
         
        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
@@ -101,36 +103,33 @@ UINavigationControllerDelegate{
         //Text fields
         topText.isHidden = false
         bottomText.isHidden = false
+        
+        //pick a new photo
+        if(imageSaved == true)
+        {
+            imageSaved = false
+        }
        
     }
     
     @IBAction func saveImage(_ sender: AnyObject) {
+        
+        if(imageSaved == false)
+        {
+            self.memedImage = generateMemedImage()
+            saveMeme()
+        }else
+        {
+            
+            let alertController = UIAlertController(title: title, message: "The photo has already been saved.",preferredStyle: .alert)
+            let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(OKAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
 
-        //hide the tool bar
-        ToolBar.isHidden = true
-        
-        // Render view to an image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        self.view.drawHierarchy(in: self.view.frame,
-                                          afterScreenUpdates: true)
-        let memedImage : UIImage =
-            UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        UIImageWriteToSavedPhotosAlbum(memedImage,nil, nil, nil)
-        //resumed the tool bar
-        ToolBar.isHidden = false
-    }
-    
-    struct Meme {
-        
-        var topTextField: String?
-        var bottomTextField: String?
-        var originalImage: UIImage?
-        let memedImage: UIImage!
-    }
-    
     @IBAction func shareImage(_ sender: Any) {
-        print("sharing....pictue.");
+    
         // memed image to activity view
         self.memedImage = generateMemedImage()
         let activityVC = UIActivityViewController(activityItems: [self.memedImage!],
@@ -140,7 +139,11 @@ UINavigationControllerDelegate{
         activityVC.completionWithItemsHandler = {
             activity, completed, items, error in
             if completed {
-                self.saveMeme()
+                
+                if(self.imageSaved == false)
+                {
+                    self.saveMeme()
+                }
                 self.dismiss(animated: true, completion: nil)
             }
         }
@@ -148,25 +151,35 @@ UINavigationControllerDelegate{
         self.present(activityVC, animated: true, completion: nil)
      }
     
-    func saveMeme() {
-        //hide the tool bar
-        ToolBar.isHidden = true
-         _ = Meme(topTextField: topText.text!, bottomTextField: bottomText.text!, originalImage: imagePicker.image!, memedImage: memedImage)
-        //resumed the tool bar
-        ToolBar.isHidden = false
+    //Struct object to store an image
+    struct Meme {
+        
+        var topTextField: String?
+        var bottomTextField: String?
+        var originalImage: UIImage?
+        let memedImage: UIImage!
+    }
     
+    
+    func saveMeme() {
+         _ = Meme(topTextField: topText.text!, bottomTextField: bottomText.text!, originalImage: imagePicker.image!, memedImage:  self.memedImage)
+        UIImageWriteToSavedPhotosAlbum( self.memedImage ,nil, nil, nil)
+        imageSaved = true
     }
     
     func generateMemedImage() -> UIImage {
         
+        //hide the tool bar
+        ToolBar.isHidden = true
         UIGraphicsBeginImageContext(self.view.frame.size)
         self.view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
+        //resumed the tool bar
+        ToolBar.isHidden = false
         
         return memedImage
     }
-    
     
     //MARK: - Delegates
     func imagePickerController(_ picker: UIImagePickerController,
@@ -213,33 +226,15 @@ UINavigationControllerDelegate{
         {
             moveTextField(textField: textField, moveDistance: -250, moveUp: false)
         }
-      
         
     }
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        //print("TextField should begin editing method called")
-        
-        return true;
-    }
-    func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        //print("TextField should clear method called")
-        return true;
-    }
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-       // print("TextField should snd editing method called")
-        return true;
-    }
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-       // print("While entering the characters this method gets called")
-        return true;
-    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
        // print("TextField should return method called")
         topText.resignFirstResponder();
         bottomText.resignFirstResponder();
         return true;
     }
-    
  
     func moveTextField(textField:UITextField, moveDistance: Int,moveUp: Bool)
     {
