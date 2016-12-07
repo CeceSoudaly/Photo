@@ -58,14 +58,9 @@
                                             <action selector="takePhoto:" destination="BYZ-38-t0r" id="tyJ-BY-0cW"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Save" width="56" id="swT-bP-s7Q">
-                                        <connections>
-                                            <action selector="saveImage:" destination="BYZ-38-t0r" id="UD0-b3-UHA"/>
-                                        </connections>
-                                    </barButtonItem>
                                     <barButtonItem style="plain" id="Lj2-XF-ov6">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sPD-OW-1Ot">
-                                            <rect key="frame" x="258" y="7" width="94" height="30"/>
+                                            <rect key="frame" x="192" y="7" width="94" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Share"/>
                                             <connections>

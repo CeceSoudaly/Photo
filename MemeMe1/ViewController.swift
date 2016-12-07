@@ -21,7 +21,6 @@ UINavigationControllerDelegate{
     
     @IBOutlet weak var takePictue: UIBarButtonItem!
     
-    var imageSaved = false
     
     let picker = UIImagePickerController()
 
@@ -35,8 +34,11 @@ UINavigationControllerDelegate{
         
         NSStrokeColorAttributeName: UIColor.black,
         NSForegroundColorAttributeName: UIColor.white,
-        NSFontAttributeName: UIFont(name: "Didot", size: 30)!,
+        //NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 30)!,
+        NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 30)!,
         NSStrokeWidthAttributeName: -3.0
+        
+        //UIFont.fontNamesForFamilyName(UIFont.familyNames()[indexPath.section])[indexPath.row]
         
     ] as [String : Any]
     
@@ -103,31 +105,10 @@ UINavigationControllerDelegate{
         //Text fields
         topText.isHidden = false
         bottomText.isHidden = false
-        
-        //pick a new photo
-        if(imageSaved == true)
-        {
-            imageSaved = false
-        }
        
     }
     
-    @IBAction func saveImage(_ sender: AnyObject) {
-        
-        if(imageSaved == false)
-        {
-            self.memedImage = generateMemedImage()
-            saveMeme()
-        }else
-        {
-            
-            let alertController = UIAlertController(title: title, message: "The photo has already been saved.",preferredStyle: .alert)
-            let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(OKAction)
-            self.present(alertController, animated: true, completion: nil)
-        }
-    }
-
+  
     @IBAction func shareImage(_ sender: Any) {
     
         // memed image to activity view
@@ -139,11 +120,7 @@ UINavigationControllerDelegate{
         activityVC.completionWithItemsHandler = {
             activity, completed, items, error in
             if completed {
-                
-                if(self.imageSaved == false)
-                {
-                    self.saveMeme()
-                }
+                self.saveMeme()
                 self.dismiss(animated: true, completion: nil)
             }
         }
@@ -163,8 +140,6 @@ UINavigationControllerDelegate{
     
     func saveMeme() {
          _ = Meme(topTextField: topText.text!, bottomTextField: bottomText.text!, originalImage: imagePicker.image!, memedImage:  self.memedImage)
-        UIImageWriteToSavedPhotosAlbum( self.memedImage ,nil, nil, nil)
-        imageSaved = true
     }
     
     func generateMemedImage() -> UIImage {
