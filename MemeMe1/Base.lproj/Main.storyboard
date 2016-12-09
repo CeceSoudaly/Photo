@@ -53,20 +53,15 @@
                                             <action selector="pickAnImage:" destination="BYZ-38-t0r" id="A7L-Wg-Mee"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Camera" width="72" id="GOB-IG-C0X">
+                                    <barButtonItem systemItem="camera" id="GOB-IG-C0X">
                                         <connections>
                                             <action selector="takePhoto:" destination="BYZ-38-t0r" id="tyJ-BY-0cW"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" id="Lj2-XF-ov6">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sPD-OW-1Ot">
-                                            <rect key="frame" x="192" y="7" width="94" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Share"/>
-                                            <connections>
-                                                <action selector="shareImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WWP-wb-o40"/>
-                                            </connections>
-                                        </button>
+                                    <barButtonItem systemItem="action" id="bqv-Vt-gMB">
+                                        <connections>
+                                            <action selector="sharePhoto:" destination="BYZ-38-t0r" id="j0R-uv-Saz"/>
+                                        </connections>
                                     </barButtonItem>
                                 </items>
                             </toolbar>

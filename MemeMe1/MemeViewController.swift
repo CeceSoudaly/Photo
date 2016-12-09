@@ -34,41 +34,48 @@ UINavigationControllerDelegate{
         
         NSStrokeColorAttributeName: UIColor.black,
         NSForegroundColorAttributeName: UIColor.white,
-        //NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 30)!,
-        NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 30)!,
+        NSFontAttributeName: UIFont(name: "HelveticaNeue-Bold", size: 30)!,
         NSStrokeWidthAttributeName: -3.0
         
-        //UIFont.fontNamesForFamilyName(UIFont.familyNames()[indexPath.section])[indexPath.row]
+        ] as [String : Any]
+    
+    func stylizeTextField(textField: UITextField) {
+        if(textField == topText)
+        {
+            topText.text = "TOP"
+        }
+        else{
+            bottomText.text = "BOTTOM"
+        }
+        textField.isHidden = true
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.autocapitalizationType = .allCharacters
+        textField.textAlignment = NSTextAlignment.center
+        textField.delegate = self
+        textField.becomeFirstResponder()
         
-    ] as [String : Any]
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
+        stylizeTextField(textField: topText)
+        stylizeTextField(textField: bottomText)
         
-        topText.isHidden = true
-        bottomText.isHidden = true
-        
-        topText.defaultTextAttributes = memeTextAttributes
-        bottomText.defaultTextAttributes = memeTextAttributes
-        topText.textAlignment = NSTextAlignment.center
-        bottomText.textAlignment = NSTextAlignment.center
-        topText.text = "TOP"
-        bottomText.text = "BOTTOM"
-        
-        topText.delegate = self
-        bottomText.delegate = self
-        
-        topText.becomeFirstResponder()
-        bottomText.becomeFirstResponder()
-        
+        //Check for camera option
         if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
         {
             takePictue.isEnabled = false;
-            
         }
-
+        
     }
+    
+    func modifiedImage()
+    {
+        picker.allowsEditing = false
+        picker.delegate = self
+    }
+
     
     //camera option
     @IBAction func takePhoto(_ sender: AnyObject) {
@@ -76,9 +83,8 @@ UINavigationControllerDelegate{
        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
         {
             let imagepicker = UIImagePickerController()
-            imagepicker.delegate = self
+            modifiedImage()
             imagepicker.sourceType = UIImagePickerControllerSourceType.camera;
-            imagepicker.allowsEditing = false
             self.present(imagepicker, animated: true, completion: nil)
             
         }else
@@ -93,9 +99,7 @@ UINavigationControllerDelegate{
     }
 
     @IBAction func pickAnImage(_ sender: AnyObject) {
-        picker.delegate = self // delegate added
-        // Only allow photos to be picked, not taken
-        picker.allowsEditing = false
+        modifiedImage()
         picker.sourceType = .photoLibrary
         picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
         picker.modalPresentationStyle = .popover
@@ -108,9 +112,7 @@ UINavigationControllerDelegate{
        
     }
     
-  
-    @IBAction func shareImage(_ sender: Any) {
-    
+    @IBAction func sharePhoto(_ sender: Any) {
         // memed image to activity view
         self.memedImage = generateMemedImage()
         let activityVC = UIActivityViewController(activityItems: [self.memedImage!],
@@ -126,17 +128,8 @@ UINavigationControllerDelegate{
         }
         
         self.present(activityVC, animated: true, completion: nil)
-     }
-    
-    //Struct object to store an image
-    struct Meme {
-        
-        var topTextField: String?
-        var bottomTextField: String?
-        var originalImage: UIImage?
-        let memedImage: UIImage!
+
     }
-    
     
     func saveMeme() {
          _ = Meme(topTextField: topText.text!, bottomTextField: bottomText.text!, originalImage: imagePicker.image!, memedImage:  self.memedImage)
@@ -205,7 +198,6 @@ UINavigationControllerDelegate{
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-       // print("TextField should return method called")
         topText.resignFirstResponder();
         bottomText.resignFirstResponder();
         return true;
