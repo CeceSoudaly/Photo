@@ -75,7 +75,6 @@ UINavigationControllerDelegate{
         picker.allowsEditing = false
         picker.delegate = self
     }
-
     
     //camera option
     @IBAction func takePhoto(_ sender: AnyObject) {
@@ -130,7 +129,7 @@ UINavigationControllerDelegate{
         self.present(activityVC, animated: true, completion: nil)
 
     }
-    
+ 
     func saveMeme() {
          _ = Meme(topTextField: topText.text!, bottomTextField: bottomText.text!, originalImage: imagePicker.image!, memedImage:  self.memedImage)
     }
@@ -162,7 +161,6 @@ UINavigationControllerDelegate{
         super.viewWillAppear(animated)
         topText.resignFirstResponder()
         bottomText.resignFirstResponder()
-  
     }
 
      //Unsubscribe
@@ -172,6 +170,7 @@ UINavigationControllerDelegate{
 
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
         self.view.endEditing(true)
     }
    
@@ -181,20 +180,17 @@ UINavigationControllerDelegate{
        if(textField == bottomText)
         {
             bottomText.text = ""
-               moveTextField(textField: textField, moveDistance: -250, moveUp: true)
+            subscribeToKeyboardNotifications()
        }else{
             topText.text = ""
         }
-      
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
     
-        if(textField == bottomText)
-        {
-            moveTextField(textField: textField, moveDistance: -250, moveUp: false)
+        if(textField == bottomText){
+            unsubscribeFromKeyboardNotifications()
         }
-        
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -202,17 +198,37 @@ UINavigationControllerDelegate{
         bottomText.resignFirstResponder();
         return true;
     }
- 
-    func moveTextField(textField:UITextField, moveDistance: Int,moveUp: Bool)
-    {
-        let moveDuration = 0.3
-        let movement:CGFloat = CGFloat(moveUp ? moveDistance : -moveDistance)
-        UIView.beginAnimations("animateTextField", context: nil)
-        UIView.setAnimationBeginsFromCurrentState(true)
-        UIView.setAnimationDuration(moveDuration)
-        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-        UIView.commitAnimations()
+    
+    func subscribeToKeyboardNotifications() {
         
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+
+    }
+    
+    func unsubscribeFromKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+    }
+    
+    func keyboardWillShow(_ notification:Notification) {
+        
+        if bottomText.isFirstResponder{
+            view.frame.origin.y -= getKeyboardHeight(notification)
+        }
+    }
+    
+    func keyboardWillHide(_ notification:Notification) {
+        
+        view.frame.origin.y = 0
+    }
+    
+    func getKeyboardHeight(_ notification:Notification) -> CGFloat {
+        
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
+        return keyboardSize.cgRectValue.height
     }
 
 
