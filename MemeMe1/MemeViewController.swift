@@ -72,8 +72,11 @@ UINavigationControllerDelegate{
     
     func modifiedImage()
     {
-        picker.allowsEditing = false
         picker.delegate = self
+        picker.allowsEditing = false
+        topText.isHidden = false
+        bottomText.isHidden = false
+        
     }
     
     //camera option
@@ -81,10 +84,9 @@ UINavigationControllerDelegate{
         
        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
         {
-            let imagepicker = UIImagePickerController()
             modifiedImage()
-            imagepicker.sourceType = UIImagePickerControllerSourceType.camera;
-            self.present(imagepicker, animated: true, completion: nil)
+            picker.sourceType = UIImagePickerControllerSourceType.camera;
+            self.present(picker, animated: true, completion: nil)
             
         }else
        {
@@ -104,10 +106,6 @@ UINavigationControllerDelegate{
         picker.modalPresentationStyle = .popover
         present(picker, animated: true, completion: nil)
         picker.popoverPresentationController?.barButtonItem = (sender as! UIBarButtonItem)
-        
-        //Text fields
-        topText.isHidden = false
-        bottomText.isHidden = false
        
     }
     
